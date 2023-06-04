@@ -9,8 +9,15 @@
         </div> -->
         <div class="name">
           {{ title }}
-          <img src="https://img.freepik.com/photos-gratuite/nature-morte-dit-non-fast-fashion_23-2149669584.jpg?w=360&t=st=1685825949~exp=1685826549~hmac=8bf897edb206ef6e6d98251dec00ae98b4db0bc562a55c828d15874b8c698f52" alt="" class="store-img">
+          <img :src="img" alt="" class="store-img">
         </div>
+
+        <van-tabs color="#ffc400">
+          <van-tab v-for="(item, index) in storeData" :title="item.name">
+            <PressingList :index="index" :pressingData="item.data"/>
+          </van-tab>
+        </van-tabs>
+
       </div>
     </div>
   </div>
@@ -19,15 +26,75 @@
 <script>
 import {reactive, toRefs} from 'vue'
 import HeaderPage from '@/components/HeaderPage.vue';
+import PressingList  from "./cpns/PressingList.vue"
 export default {
   components: {
     HeaderPage,
+    PressingList
   },
   setup(){
     let data = reactive({
       title: "Pressing",
-      img:""
+      img:"https://img.freepik.com/photos-gratuite/nature-morte-dit-non-fast-fashion_23-2149669584.jpg?w=360&t=st=1685825949~exp=1685826549~hmac=8bf897edb206ef6e6d98251dec00ae98b4db0bc562a55c828d15874b8c698f52",
+      storeData: [
+        {
+          name: "Order",
+          data: {
+            content: "Order",
+            item: [
+              {
+                text: "Hot",
+                children: [
+                 {
+                  pic: "https://img.freepik.com/photos-gratuite/portrait-femme-mignonne-positive-energique-regardant-directement-camera-bonheur_176532-9138.jpg?w=740&t=st=1685883863~exp=1685884463~hmac=0e8df47355504e8dec3416c04d8960e302031c2a2adf993b7bf77365297d779f",
+                  title: "Hot",
+                  num: 0,
+                  price: "20€",
+                  id: 1,
+                  add: true
+                 }
+                ]
+              },
+              {
+                text: "Soldes",
+                children: [
+                  {
+                    pic:"https://img.freepik.com/photos-gratuite/portrait-femme-mignonne-positive-energique-regardant-directement-camera-bonheur_176532-9138.jpg?w=740&t=st=1685883863~exp=1685884463~hmac=0e8df47355504e8dec3416c04d8960e302031c2a2adf993b7bf77365297d779f",
+                    title: "Soldes",
+                    num: 0,
+                    price: "25€",
+                    id: 5,
+                    add:true
+                  },
+                  {
+                    pic:"https://img.freepik.com/photos-gratuite/portrait-femme-mignonne-positive-energique-regardant-directement-camera-bonheur_176532-9138.jpg?w=740&t=st=1685883863~exp=1685884463~hmac=0e8df47355504e8dec3416c04d8960e302031c2a2adf993b7bf77365297d779f",
+                    title: "Soldes",
+                    num: 0,
+                    price: "25€",
+                    id: 5,
+                    add:true
+                  },
+                ]
+              }
+            ]
+          }
+        },
+        {
+          name: "Commentaires",
+          data: {
+            content:"Commentaires"
+          }
+
+        },
+        {
+          name: "Boutique",
+          data: {
+            content: "boutique",
+          }
+        }
+      ]
     });
+    
     return {
       ...toRefs(data)
     }
